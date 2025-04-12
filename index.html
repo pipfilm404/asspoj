@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#121212">
+    <title>АЖОПС - Автоматизированная Железнодорожная Операционная Программная Система</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Главный экран с выбором поезда -->
+        <div id="main-screen" class="screen active">
+            <h1 class="main-header">АЖОПС <span class="version">V.1.0.0.0</span></h1>
+            
+            <div class="main-content">
+                <div class="train-selection">
+                    <!-- Инпут для выбора поезда -->
+                    <div class="input-train">
+                        <div class="rectangle-1">
+                            <div class="div2"><i class="fas fa-train"></i> Состав</div>
+                            <div class="div">
+                                <input type="text" id="train-input" class="empty" placeholder="ЭП2Д-0081">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Выпадающий список с поездами -->
+                    <div class="train-dropdown" id="train-dropdown">
+                        <div class="train-item" data-train="ЭП2Д-0081">ЭП2Д-0081</div>
+                        <div class="train-item" data-train="ЭП2Д-0112">ЭП2Д-0112</div>
+                        <div class="train-item" data-train="ЭП2Д-0113">ЭП2Д-0113</div>
+                        <div class="train-item" data-train="ЭП2Д-0117">ЭП2Д-0117</div>
+                        <div class="train-item" data-train="ЭП2Д-0118">ЭП2Д-0118</div>
+                        <div class="train-item" data-train="ЭП2Д-0089">ЭП2Д-0089</div>
+                    </div>
+                </div>
+                
+                <button id="next-button" class="next-button">
+                    <span class="label">Далее</span>
+                </button>
+                
+                <div class="stats-container">
+                    <div class="stats-title"><i class="fas fa-info-circle"></i> Доступно составов:</div>
+                    <div class="stats-content">
+                        ЭП2Д - 6
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Экран загрузки -->
+        <div id="loading-screen" class="screen">
+            <div class="loading-content">
+                <h1 class="main-header">АЖОПС <span class="version">V.1.0.0.0</span></h1>
+                <h3 id="loading-train-name">ЭП2Д-0081</h3>
+                
+                <div class="progress-indicator">
+                    <div class="spinner">
+                        <div class="_0"></div>
+                        <div class="_45"></div>
+                        <div class="_90"></div>
+                        <div class="_135"></div>
+                        <div class="_180"></div>
+                        <div class="_225"></div>
+                        <div class="_270"></div>
+                        <div class="_325"></div>
+                    </div>
+                    <h2>Загрузка меток</h2>
+                </div>
+                
+                <div id="loading-error" class="error-message" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- Экран выбора оборудования -->
+        <div id="equipment-screen" class="screen">
+            <div class="back-button" id="back-to-main"><i class="fas fa-arrow-left"></i> Вернуться в меню</div>
+            
+            <h2 id="equipment-train-name" class="train-name">ЭП2Д-0081</h2>
+            <div class="div">Доступно всего меток:</div>
+            <div id="marks-count">0</div>
+            
+            <div class="equipment-buttons">
+                <div class="equipment-btn" data-type="undercar">
+                    <i class="fas fa-cogs"></i> <span>Подвагонное оборудование</span>
+                </div>
+                
+                <div class="equipment-btn" data-type="salon">
+                    <i class="fas fa-couch"></i> <span>Салонное оборудование</span>
+                </div>
+                
+                <div class="equipment-btn" data-type="cabin">
+                    <i class="fas fa-user-hard-hat"></i> <span>Кабина</span>
+                </div>
+            </div>
+            
+            <div class="v-1-0-0-0">АЖОПС V.1.0.0.0</div>
+        </div>
+
+        <!-- Экран с QR-кодом -->
+        <div id="qrcode-screen" class="screen">
+            <div class="back-button"><i class="fas fa-arrow-left"></i> Вернуться в меню</div>
+            
+            <div class="content">
+                <h2 id="qrcode-train-name" class="train-name">ЭП2Д-0081</h2>
+                <div id="equipment-type" class="equipment-type">Подвагонное оборудование</div>
+                
+                <div class="mark-select-container">
+                    <div class="input-group">
+                        <label for="mark-input"><i class="fas fa-tag"></i> Выбрать вручную</label>
+                        <input type="text" id="mark-input" placeholder="Введите или выберите метку" class="empty">
+                        <div id="mark-dropdown" class="dropdown-list"></div>
+                    </div>
+                </div>
+                
+                <div class="qr-content">
+                    <div id="qr-container"></div>
+                    <div id="mark-details" class="mark-details"></div>
+                </div>
+                
+                <div class="qrcode-controls">
+                    <div class="nav-row">
+                        <button class="nav-button" id="prev-mark"><i class="fas fa-chevron-left"></i> Назад</button>
+                        <button class="nav-button" id="next-mark">Далее <i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <button class="auto-button" id="auto-mode"><i class="fas fa-sync-alt"></i> Авто режим</button>
+                </div>
+            </div>
+            
+            <div class="v-1-0-0-0">АЖОПС V.1.0.0.0</div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html> 

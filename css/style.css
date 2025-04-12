@@ -1,0 +1,1043 @@
+/* Переменные */
+:root {
+    /* Современная темная тема - цветовая схема */
+    --background-color: #121212;
+    --app-background-color: #1E1E1E;
+    --surface-color: #2D2D2D;
+    --surface-color-hover: #353535;
+    --text-color: #E1E1E1;
+    --text-secondary: #A0A0A0;
+    --text-muted: #777777;
+    
+    /* Акцентные цвета */
+    --primary-color: #BB86FC;
+    --primary-color-hover: #A66EF5;
+    --secondary-color: #03DAC5;
+    --secondary-color-hover: #00B3A4;
+    --accent-color: #CF6679;
+    --error-color: #CF6679;
+    --success-color: #03DAC5;
+    --warning-color: #FFCF44;
+    
+    /* Цвета для инпутов и кнопок */
+    --input-background: #2D2D2D;
+    --input-border: #424242;
+    --input-border-focus: #BB86FC;
+    --input-text: #E1E1E1;
+    --input-placeholder: #6E6E6E;
+    --label-color: #CCCCCC;
+    
+    /* Цвета для выпадающих списков */
+    --dropdown-background: #252525;
+    --dropdown-border: #424242;
+    --dropdown-item-hover: #353535;
+    --dropdown-item-active: #424242;
+    --dropdown-item-active-text: #BB86FC;
+    
+    /* Цвета для карточек и контейнеров */
+    --card-background: #252525;
+    --card-border: #424242;
+    
+    /* Цвета для кнопок */
+    --button-background: #424242;
+    --button-background-hover: #555555;
+    --button-text: #E1E1E1;
+    --button-primary-background: #BB86FC;
+    --button-primary-hover: #A66EF5;
+    --button-primary-text: #121212;
+    
+    /* Цвета для сообщений */
+    --error-background: rgba(207, 102, 121, 0.15);
+    
+    /* Размеры шрифтов */
+    --font-size-small: 0.85rem;
+    --font-size-regular: 14px;
+    --font-size-input: 16px;
+    --font-size-button: 14px;
+    --font-size-label: 14px;
+    --font-size-subtitle: 18px;
+    --font-size-title: 1.5rem;
+    --font-size-large: 1.2rem;
+    
+    /* Радиусы границ */
+    --border-radius: 12px;
+    --border-radius-small: 8px;
+    
+    /* Основной шрифт */
+    --font-family: 'Roboto', Arial, sans-serif;
+    
+    /* Переменные для анимаций */
+    --transition-time: 0.3s;
+    
+    /* Переменные для таймера */
+    --timer-size: 230px;
+    --timer-color: #BB86FC;
+    --timer-duration: 15s;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    --border-color: #424242;
+    --spacing: 16px;
+    --padding-small: 8px;
+    --padding-normal: 15px;
+    --padding-large: 20px;
+    --transition-speed: 0.3s;
+    --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Сброс и базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-regular);
+    color: var(--text-color);
+    background-color: var(--background-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    background-color: var(--app-background-color);
+    box-shadow: var(--box-shadow);
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    height: 100vh;
+    max-height: 800px;
+}
+
+.container {
+    padding: var(--padding-large);
+    width: 100%;
+}
+
+/* Стили для всех экранов */
+.screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    overflow-y: auto;
+    background-color: var(--app-background-color);
+    padding: var(--padding-large);
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-speed);
+}
+
+.screen.active {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.title {
+    font-size: var(--font-size-title);
+    font-weight: 600;
+    margin-bottom: calc(var(--padding-large) * 1.5);
+    text-align: center;
+    color: var(--text-color);
+}
+
+.main-header {
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--primary-color);
+    margin: 40px 0;
+}
+
+.version {
+    font-size: 0.7em;
+    opacity: 0.8;
+    color: var(--secondary-color);
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Иконки в интерфейсе */
+.fas {
+    margin-right: 8px;
+}
+
+.nav-button .fas.fa-chevron-right {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+/* Главный экран */
+#main-screen {
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 0 20px;
+}
+
+.train-selection {
+    width: 100%;
+    position: relative;
+    margin-bottom: 32px;
+}
+
+.input-train {
+    width: 100%;
+    position: relative;
+}
+
+.rectangle-1 {
+    background-color: var(--input-background);
+    border-radius: var(--border-radius);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--input-border);
+}
+
+.div2 {
+    color: var(--label-color);
+    font-size: var(--font-size-small);
+    margin-bottom: 6px;
+    text-align: left;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.div {
+    width: 100%;
+}
+
+#train-input {
+    background: transparent;
+    border: none;
+    color: var(--input-text);
+    font-size: var(--font-size-large);
+    width: 100%;
+    outline: none;
+    font-weight: 500;
+}
+
+#train-input.empty {
+    color: var(--input-placeholder);
+}
+
+.train-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--dropdown-background);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    z-index: 100;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--dropdown-border);
+    border-top: none;
+}
+
+.train-dropdown.visible {
+    display: block;
+}
+
+.train-item {
+    padding: 16px;
+    cursor: pointer;
+    color: var(--input-text);
+    transition: all 0.2s ease;
+    text-align: left;
+    border-bottom: 1px solid var(--dropdown-border);
+    font-weight: 500;
+}
+
+.train-item:last-child {
+    border-bottom: none;
+}
+
+.train-item:hover, .train-item.highlighted {
+    background-color: var(--dropdown-item-hover);
+    padding-left: 20px;
+    color: var(--primary-color);
+}
+
+.next-button {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 14px 0;
+    color: var(--button-primary-text);
+    font-size: var(--font-size-button);
+    cursor: pointer;
+    margin-bottom: 40px;
+    width: 40%;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(187, 134, 252, 0.3);
+    transition: all 0.3s ease;
+}
+
+.next-button:hover {
+    background-color: var(--primary-color-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(187, 134, 252, 0.4);
+}
+
+.stats-container {
+    margin-top: 30px;
+    width: 100%;
+    color: var(--text-secondary);
+    font-size: var(--font-size-small);
+    text-align: center;
+    background-color: var(--surface-color);
+    padding: 16px;
+    border-radius: var(--border-radius);
+}
+
+.stats-title {
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--text-color);
+    letter-spacing: 0.5px;
+}
+
+.stats-content {
+    line-height: 1.6;
+}
+
+/* Экран загрузки */
+#loading-screen {
+    justify-content: center;
+    align-items: center;
+    background-color: var(--app-background-color);
+}
+
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;
+}
+
+#loading-train-name {
+    font-size: var(--font-size-subtitle);
+    margin-bottom: 80px;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.progress-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.spinner div {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    animation: fade 1s linear infinite;
+    opacity: 0;
+    transform-origin: center;
+    filter: drop-shadow(0 0 3px rgba(187, 134, 252, 0.6));
+}
+
+/* Позиции точек спиннера */
+._0 { transform: rotate(0deg) translate(0, -24px); animation-delay: 0s; }
+._45 { transform: rotate(45deg) translate(0, -24px); animation-delay: 0.125s; }
+._90 { transform: rotate(90deg) translate(0, -24px); animation-delay: 0.25s; }
+._135 { transform: rotate(135deg) translate(0, -24px); animation-delay: 0.375s; }
+._180 { transform: rotate(180deg) translate(0, -24px); animation-delay: 0.5s; }
+._225 { transform: rotate(225deg) translate(0, -24px); animation-delay: 0.625s; }
+._270 { transform: rotate(270deg) translate(0, -24px); animation-delay: 0.75s; }
+._325 { transform: rotate(315deg) translate(0, -24px); animation-delay: 0.875s; }
+
+@keyframes fade {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+/* Экран выбора оборудования */
+#equipment-screen {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Стиль для кнопки возврата в меню */
+.back-button {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 30px;
+    background-color: var(--secondary-color);
+    color: #121212;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(3, 218, 197, 0.3);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.back-button:hover {
+    background-color: var(--secondary-color-hover);
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 6px 16px rgba(3, 218, 197, 0.4);
+}
+
+#qrcode-screen .back-button {
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#equipment-train-name {
+    font-size: var(--font-size-large);
+    font-weight: 600;
+    margin-top: 70px;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+#marks-count {
+    color: var(--text-color);
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.equipment-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.equipment-btn {
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius);
+    padding: 18px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--card-border);
+    font-weight: 500;
+}
+
+.equipment-btn:hover {
+    background-color: var(--surface-color-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.equipment-btn.active {
+    background-color: var(--primary-color);
+    color: #121212;
+    font-weight: 600;
+    border-color: var(--primary-color);
+}
+
+.v-1-0-0-0 {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    font-size: 10px;
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Экран с QR-кодом */
+#qrcode-screen {
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+}
+
+#qrcode-screen .screen-header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    margin-top: 50px;
+}
+
+#qrcode-screen h1 {
+    font-size: var(--font-size-subtitle);
+    font-weight: 500;
+}
+
+#qrcode-screen .content {
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.mark-select-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-group {
+    width: 100%;
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    font-size: var(--font-size-small);
+    color: var(--label-color);
+    margin-bottom: 8px;
+    display: block;
+    text-align: left;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+#mark-input {
+    width: 100%;
+    padding: 14px 16px;
+    background-color: var(--input-background);
+    border: 1px solid var(--input-border);
+    border-radius: var(--border-radius);
+    color: var(--input-text);
+    font-size: var(--font-size-input);
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#mark-input:focus {
+    border-color: var(--input-border-focus);
+    box-shadow: 0 4px 12px rgba(187, 134, 252, 0.15);
+}
+
+#mark-input.empty {
+    color: var(--input-placeholder);
+}
+
+#mark-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: var(--dropdown-background);
+    border: 1px solid var(--dropdown-border);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    z-index: 50;
+    display: none;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+#mark-dropdown.visible {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    border-bottom: 1px solid var(--dropdown-border);
+}
+
+.dropdown-item:hover {
+    background-color: var(--dropdown-item-hover);
+    padding-left: 20px;
+    color: var(--primary-color);
+}
+
+.dropdown-item.active {
+    background-color: var(--dropdown-item-active);
+    color: var(--dropdown-item-active-text);
+}
+
+.dropdown-item.hidden {
+    display: none;
+}
+
+.dropdown-item.empty {
+    color: var(--text-muted);
+    cursor: default;
+    font-style: italic;
+}
+
+.dropdown-item.empty:hover {
+    background-color: transparent;
+    padding-left: 16px;
+    color: var(--text-muted);
+}
+
+#generate-qr-button {
+    width: 100%;
+    padding: 14px 16px;
+    background-color: var(--button-background);
+    color: var(--button-text);
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-button);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#generate-qr-button:hover {
+    background-color: var(--button-background-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.qr-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--card-border);
+}
+
+.train-info {
+    width: 100%;
+    text-align: center;
+    font-size: var(--font-size-small);
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+#qr-container {
+    width: 100%;
+    max-width: 220px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    padding: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+#qr-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+}
+
+#qr-container img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.mark-details {
+    width: 100%;
+    padding: 14px;
+    text-align: center;
+    font-size: var(--font-size-regular);
+    line-height: 1.5;
+    margin-bottom: 14px;
+    background-color: rgba(187, 134, 252, 0.08);
+    border-radius: var(--border-radius-small);
+    border-left: 3px solid var(--primary-color);
+}
+
+.error-message {
+    background-color: var(--error-background);
+    color: var(--error-color);
+    padding: 14px 16px;
+    margin: 16px auto;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--error-color);
+    font-size: var(--font-size-regular);
+    max-width: 85%;
+    text-align: left;
+    position: relative;
+    display: none;
+    animation: fadeIn 0.3s ease;
+    box-shadow: 0 4px 12px rgba(207, 102, 121, 0.15);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Стили для кнопок навигации */
+.qrcode-controls {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+}
+
+.qrcode-controls .nav-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.qrcode-controls .nav-button,
+.qrcode-controls .auto-button {
+    background-color: var(--button-background);
+    color: var(--button-text);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 14px 10px;
+    font-size: var(--font-size-regular);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.qrcode-controls .nav-button:hover,
+.qrcode-controls .auto-button:hover {
+    background-color: var(--button-background-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.qrcode-controls .nav-button {
+    flex: 1;
+}
+
+.qrcode-controls .auto-button {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--primary-color);
+    color: #121212;
+    box-shadow: 0 4px 12px rgba(187, 134, 252, 0.3);
+}
+
+.qrcode-controls .auto-button:hover {
+    background-color: var(--primary-color-hover);
+    box-shadow: 0 6px 16px rgba(187, 134, 252, 0.4);
+}
+
+.auto-button.timing {
+    position: relative;
+    animation: pulse 2s infinite;
+}
+
+.circle-timer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 50%, transparent 50%),
+                linear-gradient(90deg, transparent 50%, rgba(255, 255, 255, 0.2) 50%);
+    z-index: 0;
+    opacity: 0.3;
+    transform-origin: center;
+}
+
+@keyframes timer-animation {
+    0% {
+        clip-path: polygon(50% 50%, 50% 0%, 50% 0%, 50% 50%);
+    }
+    50% {
+        clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 100%, 50% 50%);
+    }
+    100% {
+        clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%, 50% 50%);
+    }
+}
+
+/* Стили для QR-кода и текста */
+.qr-text {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+#qrcode {
+    margin: 0 auto;
+}
+
+#qr-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Стили для списка оборудования */
+#equipment-list {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto 80px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.equipment-item {
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius);
+    padding: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--card-border);
+}
+
+.equipment-item:hover {
+    background-color: var(--surface-color-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary-color);
+}
+
+.equipment-item-title {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--primary-color);
+}
+
+.equipment-item-subtitle {
+    font-size: var(--font-size-small);
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Стили для отображения отсутствия данных */
+.empty-state {
+    padding: var(--padding-large);
+    text-align: center;
+    color: var(--text-secondary);
+    background-color: rgba(187, 134, 252, 0.05);
+    border-radius: var(--border-radius);
+    margin: 20px 0;
+    border: 1px dashed var(--primary-color);
+    padding: 24px;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 480px) {
+    .main-header {
+        margin-top: 40px;
+        margin-bottom: 40px;
+        font-size: 24px;
+    }
+    
+    #equipment-train-name {
+        margin-top: 60px;
+    }
+    
+    .qr-content {
+        padding: 16px;
+    }
+    
+    .equipment-btn {
+        padding: 16px;
+    }
+    
+    .nav-button, .auto-button {
+        padding: 12px 8px;
+    }
+}
+
+/* Анимации для переходов экранов */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.screen.active {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+    animation: fadeInUp 0.4s ease-out;
+}
+
+/* Эффекты фокуса для элементов ввода */
+input:focus, button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.3);
+}
+
+/* Стиль для активного оборудования */
+.equipment-type {
+    display: inline-block;
+    background-color: rgba(187, 134, 252, 0.15);
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 8px 0 20px 0;
+    color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(187, 134, 252, 0.2);
+}
+
+/* Пульсирующая подсветка для важных элементов */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(187, 134, 252, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(187, 134, 252, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(187, 134, 252, 0);
+    }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Стили для выпадающего списка меток */
+.dropdown-list {
+    position: absolute;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    max-height: 300px;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 100;
+    margin-top: 4px;
+    display: none;
+    padding: 0;
+}
+
+.dropdown-list.visible {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    white-space: normal !important; /* Перенос текста на новую строку */
+    overflow: visible;
+    text-overflow: initial;
+    line-height: 1.5;
+    border-bottom: 1px solid var(--border-color-light);
+    transition: background-color 0.2s;
+    word-break: break-word; /* Разрешает разрыв слов */
+    width: 100%;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover, .dropdown-item.selected {
+    background-color: var(--primary-color-light);
+    color: var(--text-high-emphasis);
+}
+
+.dropdown-item.selected {
+    font-weight: 600;
+}
+
+.empty-dropdown {
+    padding: 12px 16px;
+    color: var(--text-medium-emphasis);
+    text-align: center;
+    font-style: italic;
+} 
