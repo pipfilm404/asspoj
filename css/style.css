@@ -1025,6 +1025,10 @@ body::after {
     #qr-container {
         width: 180px;
         height: 180px;
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 16px;
+        box-shadow: var(--shadow-medium);
     }
 }
 
