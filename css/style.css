@@ -1023,12 +1023,13 @@ body::after {
     }
     
     #qr-container {
-        width: 180px;
-        height: 180px;
+        width: 200px;
+        height: 200px;
         background: white;
         border-radius: var(--border-radius);
         padding: 16px;
         box-shadow: var(--shadow-medium);
+        transform: none; /* Отключаем hover эффекты на мобильных */
     }
 }
 
