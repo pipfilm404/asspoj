@@ -1369,8 +1369,8 @@ const AppController = {
             
             new QRCode(qrCodeElement, {
                 text: qrText,
-                width: 200,
-                height: 200,
+                width: 168,  // было 200
+                height: 168, // было 200
                 colorDark: '#000000',
                 colorLight: '#ffffff',
                 correctLevel: QRCode.CorrectLevel.M // Снижаем уровень коррекции ошибок для большей вместимости

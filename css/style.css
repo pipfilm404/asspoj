@@ -876,8 +876,10 @@ body::after {
 }
 
 #qr-container {
-    width: 200px;
-    height: 200px;
+    width: 80vw; /* Используем 80% ширины экрана */
+    height: 80vw; /* Делаем его квадратным */
+    max-width: 200px; /* Ограничиваем максимальный размер */
+    max-height: 200px; /* Ограничиваем максимальный размер */
     background: white;
     border-radius: var(--border-radius);
     padding: 16px;
@@ -974,7 +976,7 @@ body::after {
 }
 
 /* Адаптивность */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .app-container {
         max-width: 100%;
         border-left: none;
@@ -1022,13 +1024,27 @@ body::after {
         padding: 16px;
     }
     
+    .qr-content {
+        max-width: 100%; /* Убираем ограничение 300px на мобильных */
+    }
+    
+    .mark-select-container {
+        max-width: 100%; /* Убираем ограничение 350px на мобильных */
+    }
+    
+    .qrcode-controls {
+        max-width: 100%; /* Убираем ограничение 350px на мобильных */
+    }
+    
     #qr-container {
-        width: 180px;
-        height: 180px;
+        width: 200px;
+        height: 200px;
         background: white;
         border-radius: var(--border-radius);
         padding: 16px;
         box-shadow: var(--shadow-medium);
+        transform: none; /* Отключаем hover эффекты на мобильных */
+        margin: 0 auto; /* Центрируем QR-код */
     }
 }
 
